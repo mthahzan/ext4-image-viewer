@@ -25,3 +25,7 @@ Then update the `constants/io.js` and `constants/image.js` files with the correc
 ```bash
 yarn start
 ```
+
+This should yeild the outputs as shown on the screenshot
+
+<img width="301" alt="Screenshot 2024-01-10 at 11 45 16" src="https://github.com/mthahzan/ext4-image-viewer/assets/5820988/d3332701-2239-4cfb-bdbe-52a98d5e79a2">
