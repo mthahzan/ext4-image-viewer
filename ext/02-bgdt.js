@@ -2,6 +2,7 @@ const { open, read, writeFile } = require('../utils/fs');
 const { chunk, readUInt } = require('../utils/buffer');
 const { formatBufferInHex, formatInfo } = require('../utils/format');
 const { imagePath, outputDirectory } = require('../constants/io');
+const { blockSize, inodeRatio, inodeSize, imageSize, numberOfBlockGroups } = require('../constants/image');
 
 const outputPaths = {
   all: {
@@ -27,20 +28,11 @@ const outputPaths = {
   },
 };
 
-const blockSize = 4096;
 const bgdtOffset = blockSize;
 const bgdtSize = blockSize;
 
-const numberOfBlockGroups = 4;
-
-const inodeRatio = 16384;
-const inodeSize = 256;
-const fileSystemSize = 1024 * 1024 * 451;
-const numberOfInodesPerBlockGroup = fileSystemSize / inodeRatio / numberOfBlockGroups;
+const numberOfInodesPerBlockGroup = imageSize / inodeRatio / numberOfBlockGroups;
 const inodeTableSize = inodeSize * numberOfInodesPerBlockGroup;
-
-// const blockGroupBlocks = blockSize * 8;
-// const blockGroupSize = blockGroupBlocks * blockSize;
 
 const bgdtBufferToInfo = (buffer) => {
   return {
@@ -466,6 +458,9 @@ module.exports.resolvBlockGroupDescriptorTable = async () => {
     console.log(`block group ${i} inode table hex written to ${outputPaths.inodeTable.hex(i)}`);
 
     console.log(`Resolving block group ${i} inode table info...`);
+    // For some reason the 8xx block fails to resolve inode table info
+    // For the purpose of this assignment we will only resolve the first 500 inodes
+    // TODO: Fix this issue
     for (let j = 0; j < Math.min(numberOfInodesPerBlockGroup, 500); j++) {
       console.log(`Resolving block group ${i} inode ${j + 1} info...`);
       const inodeOffset = j * inodeSize;

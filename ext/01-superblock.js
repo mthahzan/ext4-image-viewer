@@ -2,15 +2,12 @@ const { open, read, writeFile } = require('../utils/fs');
 const { chunk, readUInt } = require('../utils/buffer');
 const { formatBufferInHex, formatInfo } = require('../utils/format');
 const { imagePath, outputDirectory } = require('../constants/io');
+const { superblockOffset, superblockSize } = require('../constants/image');
 
 const outputPaths = {
   hex: `${outputDirectory}/1-Superblock-Hex.txt`,
   info: `${outputDirectory}/1-Superblock-Info.txt`,
 };
-
-const bootSize = 1024;
-const superblockOffset = bootSize;
-const superblockSize = 1024;
 
 const bufferToInfo = (buffer) => {
   return {

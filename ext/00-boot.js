@@ -1,13 +1,12 @@
 const { open, read, writeFile } = require('../utils/fs');
 const { formatBufferInHex } = require('../utils/format');
 const { imagePath, outputDirectory } = require('../constants/io');
+const { bootSize } = require('../constants/image');
 
 const outputPaths = {
   hex: `${outputDirectory}/0-Boot-Hex.txt`,
   info: `${outputDirectory}/0-Boot-Info.txt`,
 };
-
-const bootSize = 1024;
 
 module.exports.resolveBoot = async () => {
   console.log(''); // Add a newline for readability
