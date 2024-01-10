@@ -187,9 +187,9 @@ const inodeExtentOfIndexNodeBufferToInfo = (buffer) => {
       hex: chunk(buffer, entryOffset + 8, 2).toString('hex'),
     };
 
-    result[`Extent index ${i + 1}: Block`] = block;
-    result[`Extent index ${i + 1}: Leaf node block`] = leafNodeBlock;
-    result[`Extent index ${i + 1}: Start`] = start;
+    result.block = block;
+    result.leafNodeBlock = leafNodeBlock;
+    result.start = start;
   }
 
   return result;
@@ -245,17 +245,17 @@ const inodeTableBufferToInfo = (buffer) => {
       value: readUInt(buffer, 26, 2),
       hex: chunk(buffer, 26, 2).toString('hex'),
     },
-    'Lower 32-bits of block count': {
+    blockCount: {
       label: 'Lower 32-bits of block count',
       value: readUInt(buffer, 28, 4),
       hex: chunk(buffer, 28, 4).toString('hex'),
     },
-    'Flags': {
+    flags: {
       label: 'Flags',
       value: readUInt(buffer, 32, 4),
       hex: chunk(buffer, 32, 4).toString('hex'),
     },
-    'OS specific value 1': {
+    osValue: {
       label: 'OS specific value 1',
       value: readUInt(buffer, 36, 4),
       hex: chunk(buffer, 36, 4).toString('hex'),
@@ -268,27 +268,27 @@ const inodeTableBufferToInfo = (buffer) => {
     //   __le16  eh_depth;       /* has tree real underlying blocks? */ 
     //   __le32  eh_generation;  /* generation of the tree */ 
     // };
-    'Extent header: Magic signature': {
+    extentHeaderMagicSignature: {
       label: 'Extent header: Magic signature',
       value: chunk(iblockExtentHeaderBuffer, 0, 2).toString('hex'),
       hex: chunk(iblockExtentHeaderBuffer, 0, 2).toString('hex'),
     },
-    'Extent header: Number of entries': {
+    extentHeaderEntries: {
       label: 'Extent header: Number of entries',
       value: readUInt(iblockExtentHeaderBuffer, 2, 2),
       hex: chunk(iblockExtentHeaderBuffer, 2, 2).toString('hex'),
     },
-    'Extent header: Max no. of entries': {
+    extentHeaderNoOfEntries: {
       label: 'Extent header: Capacity of entries',
       value: readUInt(iblockExtentHeaderBuffer, 4, 2),
       hex: chunk(iblockExtentHeaderBuffer, 4, 2).toString('hex'),
     },
-    'Extent header: Depth': {
+    extentHeaderDepth: {
       label: 'Extent header: Depth',
       value: readUInt(iblockExtentHeaderBuffer, 6, 2),
       hex: chunk(iblockExtentHeaderBuffer, 6, 2).toString('hex'),
     },
-    'Extent header: Generation': {
+    extentHeaderGeneration: {
       label: 'Extent header: Generation',
       value: readUInt(iblockExtentHeaderBuffer, 8, 4),
       hex: chunk(iblockExtentHeaderBuffer, 8, 4).toString('hex'),
@@ -315,78 +315,62 @@ const inodeTableBufferToInfo = (buffer) => {
 
   result = {
     ...result,
-    'File version': {
+    fileVersion: {
       label: 'File version',
       value: readUInt(buffer, 104, 4),
       hex: chunk(buffer, 104, 4).toString('hex'),
     },
-    'File ACL': {
+    fileACL: {
       label: 'File ACL',
       value: readUInt(buffer, 108, 4),
       hex: chunk(buffer, 108, 4).toString('hex'),
     },
-    'File size upper': {
+    fileSizeUpper: {
       label: 'File size upper',
       value: readUInt(buffer, 112, 4),
       hex: chunk(buffer, 112, 4).toString('hex'),
     },
-    // 'Fragment address': {
-    //   label: 'Fragment address',
-    //   value: readUInt(buffer, 116, 4),
-    // },
-    // 'Union of file ACL and fragment address': {
-    //   label: 'Union of file ACL and fragment address',
-    //   value: readUInt(buffer, 120, 4),
-    // },
-    // 'Union of file ACL and fragment address': {
-    //   label: 'Union of file ACL and fragment address',
-    //   value: readUInt(buffer, 124, 4),
-    // },
-    // 'Union of file ACL and fragment address': {
-    //   label: 'Union of file ACL and fragment address',
-    //   value: readUInt(buffer, 128, 4),
-    // },
-    'Extra size': {
+    extraSize: {
       label: 'Extra size',
       value: readUInt(buffer, 128, 2),
       hex: chunk(buffer, 128, 2).toString('hex'),
     },
-    'Upper 16-bits of the inode checksum': {
+    inodeChecksum: {
       label: 'Upper 16-bits of the inode checksum',
       value: readUInt(buffer, 134, 2),
       hex: chunk(buffer, 134, 2).toString('hex'),
     },
-    'Extra change time bits': {
+    extraChangeTimeBits: {
       label: 'Extra change time bits',
       value: readUInt(buffer, 136, 4),
       hex: chunk(buffer, 136, 4).toString('hex'),
     },
-    'Extra modification time bits': {
+    extraModificationTimeBits: {
       label: 'Extra modification time bits',
       value: readUInt(buffer, 140, 4),
       hex: chunk(buffer, 140, 4).toString('hex'),
     },
-    'Extra access time bits': {
+    extraAccessTimeBits: {
       label: 'Extra access time bits',
       value: readUInt(buffer, 144, 4),
       hex: chunk(buffer, 144, 4).toString('hex'),
     },
-    'File creation time': {
+    fileCreationTime: {
       label: 'File creation time',
       value: readUInt(buffer, 148, 4),
       hex: chunk(buffer, 148, 4).toString('hex'),
     },
-    'Extra file creation time bits': {
+    extraFileCreationTimeBits: {
       label: 'Extra file creation time bits',
       value: readUInt(buffer, 152, 4),
       hex: chunk(buffer, 152, 4).toString('hex'),
     },
-    'Upper 32-bits for version number': {
+    upper32BitsForVersionNumber: {
       label: 'Upper 32-bits for version number',
       value: readUInt(buffer, 156, 4),
       hex: chunk(buffer, 156, 4).toString('hex'),
     },
-    'Project ID': {
+    projectId: {
       label: 'Project ID',
       value: readUInt(buffer, 160, 4),
       hex: chunk(buffer, 160, 4).toString('hex'),
