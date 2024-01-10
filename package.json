@@ -1,0 +1,10 @@
+{
+  "name": "ext4-image-info-viewer",
+  "version": "0.0.1",
+  "description": "A simple ext4 image info viewer. It can show the superblock, group descriptor table, inode table, and block bitmap.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  }
+}
