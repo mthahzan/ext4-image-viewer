@@ -1,5 +1,7 @@
 # EXT4 Image info viewer
 
+**WARNING** This is an experimental tool that I developed as part of my MSc. assignment. This has many limitations and assumptions. Not to mention my limited knowledge of the intricacies of the EXT4 file system. Use with caution and please verify the outputs you get.
+
 This script can be useful to get lower level information about an EXT4 image.
 
 ## Requirements
