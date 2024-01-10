@@ -16,7 +16,7 @@ git clone git@github.com:mthahzan/ext4-image-viewer.git
 cd ext4-image-viewer
 ```
 
-Then update the `constants/io.js` file with the path to the image file and the desired output path.
+Then update the `constants/io.js` and `constants/image.js` files with the correct values.
 
 ## Usage
 
