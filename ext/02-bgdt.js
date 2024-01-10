@@ -485,11 +485,11 @@ module.exports.resolvBlockGroupDescriptorTable = async () => {
     }
     console.log(`block group ${i} inode table info written to ${outputPaths.inode.info(i)}`);
 
-    const fileBlockBuffer = Buffer.alloc(blockSize);
-    const fileBlockOffset = 33282 * blockSize;
-    await read(fd, fileBlockBuffer, 0, blockSize, fileBlockOffset);
-    const formattedFileBlockHexData = formatBufferInHex(fileBlockBuffer);
-    await writeFile(`./outputs/FILE.txt`, formattedFileBlockHexData);
+    // const fileBlockBuffer = Buffer.alloc(blockSize);
+    // const fileBlockOffset = 33282 * blockSize;
+    // await read(fd, fileBlockBuffer, 0, blockSize, fileBlockOffset);
+    // const formattedFileBlockHexData = formatBufferInHex(fileBlockBuffer);
+    // await writeFile(`./outputs/FILE.txt`, formattedFileBlockHexData);
 
     blockGroupDescriptors.push(blockGroupDescriptor);
     blockGroupDescriptorInfos.push(blockGroupDescriptorInfo);
